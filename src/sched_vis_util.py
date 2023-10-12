@@ -1,7 +1,7 @@
 import json
 
 
-class ScheVisObj:
+class SchedVisObj:
     def __init__(self, task_idx: int, start_time: int, finish_time: int, core_idx: int=0, job_idx: int=0, release_time: int=0):
         self._task_idx = task_idx
         self._start_time = start_time
@@ -37,7 +37,7 @@ class ScheVisObj:
 
 class SchedulingVisualizerUtil:
     @staticmethod
-    def save(objs: list[ScheVisObj], scheduling_length: int | None=None, filename: str='output') -> str:
+    def save(objs: list[SchedVisObj], scheduling_length: int | None=None, filename: str='output') -> str:
         json_dict = {
             'makespan': scheduling_length or max([obj.finish_time for obj in objs]),
             'taskSet':[]
