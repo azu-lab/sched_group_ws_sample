@@ -3,6 +3,7 @@ from __future__ import annotations
 import yaml
 from networkx import DiGraph, all_simple_paths
 from PIL import Image
+from glob import glob
 
 class RDG_DAG:
     def __init__(self, wcets: list[int], edges: list[set[int]], rdgen_obj: dict, filepath: str, img: Image.Image):
@@ -85,3 +86,11 @@ class RDG_DAG:
         edges = [(e['source'], e['target']) for e in rdg_obj['links']]
 
         return RDG_DAG(wcets, edges, rdg_obj, filepath, img)
+
+    @classmethod
+    def load_from_rd_gen_dir(cls, dirpath: str, regex: str='*'):
+        dags: list[RDG_DAG] = []
+        for filepath in glob(f'{dirpath}/{regex}.yaml'):
+            dags.append(cls.load_from_rd_gen(filepath))
+
+        return dags
