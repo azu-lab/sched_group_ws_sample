@@ -4,13 +4,19 @@ from src.dag_rd_gen import RDG_DAG
 from sample_scheduler.dag import Dag, Node
 from sample_scheduler.scheduler import Scheduler
 
-def simulate(dag: RDG_DAG):
+def simulate(dag: RDG_DAG, **kwargs):
     # implement each method here
 
     # the following is a sample
-    dag_scheduling = Dag(dag.wcets, dag.edges)
-    scheduler = Scheduler(5)
-    scheduled_nodes: list[Node] = scheduler.schedule_dag(dag_scheduling)
+    # dag_scheduling = Dag(dag.wcets, dag.edges)
+    # scheduler = Scheduler(5)
+    # scheduled_nodes: list[Node] = scheduler.schedule_dag(dag_scheduling)
+    if kwargs['method'] == 'existing':
+        return 200
+    if kwargs['method'] == 'proposed':
+        dag_scheduling = Dag(dag.wcets, dag.edges)
+        scheduler = Scheduler(kwargs['core_num'])
+        scheduled_nodes: list[Node] = scheduler.schedule_dag(dag_scheduling)
 
     # return evaluated value
     # in sample, response time of DAG (maximum finish time of all nodes)
@@ -62,3 +68,20 @@ def prepare_method_taskset(dags: list[RDG_DAG]):
     print()
 
     return results
+
+def evaluate_varing_parameter(dags: list[RDG_DAG], arg_dict: dict={}, **kwargs):
+    if len(kwargs) == 0:
+        return [simulate(dag, **arg_dict) for dag in dags]
+    else:
+        results: dict = {}
+        parameter_name, parameter_values = list(kwargs.items())[0]
+
+        kwargs_updated = kwargs.copy()
+        kwargs_updated.pop(parameter_name)
+
+        for v in parameter_values:
+            arg_dict_updated = arg_dict.copy()
+            arg_dict_updated[parameter_name] = v
+
+            results[v] = evaluate_varing_parameter(dags, arg_dict_updated, **kwargs_updated)
+        return results
