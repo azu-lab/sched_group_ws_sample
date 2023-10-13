@@ -11,6 +11,8 @@ def simulate(dag: RDG_DAG, **kwargs):
     # dag_scheduling = Dag(dag.wcets, dag.edges)
     # scheduler = Scheduler(5)
     # scheduled_nodes: list[Node] = scheduler.schedule_dag(dag_scheduling)
+
+    # for section 6
     if kwargs['method'] == 'existing':
         return 200
     if kwargs['method'] == 'proposed':
@@ -63,7 +65,7 @@ def prepare_method_taskset(dags: list[RDG_DAG]):
             opt = None
 
         if lose:
-            results.append({'dag': dag, 'optional': opt})
+            results.append({'idx': idx, 'dag': dag, 'optional': opt})
         print("\r" + f'{idx+1} / {loop_len} : {100*(idx+1)/loop_len:.0f}%', end="")
     print()
 
