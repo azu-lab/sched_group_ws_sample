@@ -1,4 +1,10 @@
 # sched_group_ws_sample
+Sample procedures are described in each jupyter notebook (.ipynb).
+
+## 0. install dependency package
+```bash
+pip3 install -r ./requirements.txt
+```
 
 ## 1. RD-Gen Reader
 ### 1. 1. Basic status of DAG
