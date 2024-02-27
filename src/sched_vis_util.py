@@ -3,12 +3,18 @@ import json
 
 class SchedVisObj:
     def __init__(self, task_idx: int, start_time: int, finish_time: int, core_idx: int=0, job_idx: int=0, release_time: int=0):
-        self._task_idx = task_idx
-        self._start_time = start_time
-        self._finish_time = finish_time
-        self._core_idx = core_idx
-        self._job_idx = job_idx
-        self._release_time = release_time
+        """
+        data to visualizer
+
+        neccesary: task_idx, start_time, finish_time
+        optinal  : core_idx, job_idx, release_time
+        """
+        self._task_idx: int = task_idx
+        self._start_time: int = start_time
+        self._finish_time: int = finish_time
+        self._core_idx: int = core_idx
+        self._job_idx: int = job_idx
+        self._release_time: int = release_time
 
     @property
     def task_idx(self) -> int:
@@ -38,6 +44,12 @@ class SchedVisObj:
 class SchedulingVisualizerUtil:
     @staticmethod
     def save(objs: list[SchedVisObj], scheduling_length: int | None=None, filename: str='output') -> str:
+        """
+        visualize scheduling from object
+
+        scheduling_length (optional)        : limit of visualize time
+        filename (default: output.json/html): output filename
+        """
         json_dict = {
             'makespan': scheduling_length or max([obj.finish_time for obj in objs]),
             'taskSet':[]
@@ -63,6 +75,15 @@ class SchedulingVisualizerUtil:
     @staticmethod
     def save_from_array(task_idxs: list[int], start_times: list[int], finish_times: list[int], core_idxs: list[int] | None=None, job_idxs: list[int] | None=None, release_times: list[int] | None=None,
                         scheduling_length: int | None=None, filename: str='output') -> str:
+        """
+        visualize scheduling from data array
+
+        neccesary: task_idx, start_time, finish_time
+        optinal  : core_idx, job_idx, release_time
+
+        scheduling_length (optional)        : limit of visualize time
+        filename (default: output.json/html): output filename
+        """
         if core_idxs is None:
             core_idxs = [0 for _ in range(len(task_idxs))]
         if job_idxs is None:
