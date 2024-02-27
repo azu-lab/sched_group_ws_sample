@@ -47,7 +47,7 @@ src.simulate.simulate return evaluated value (ex. WCRT)
 src.simulate.simulate_taskset return list of evaluated values for all DAG (dags)
 ### 4. 3. visualize
 
-appendix (not refactored)
+**↓ appendix (not refactored) ↓**
 
 ## 5. prepare to existing method
 ### 5. 1. load RD-Gen from directory
@@ -56,3 +56,16 @@ appendix (not refactored)
 ### 6. 1. load RD-Gen from directory
 ### 6. 2. evaluate with varing parameter
 ### 6. 3. visualize
+
+# directory
+- output/            : graphs and files are outputted here
+- sample_input/      : input files of samples are here
+- sample_shceduler/  : scheduling algorithm using sample (not refactored)
+- src/
+  - dag_rd_gen.py    : RDG_DAG class which can load data from RD-Gen file is implemented
+  - sched_vis_util.py: Visualize helper class is implemented
+  - simulate.py      : sample function of evaluate scheduling algorithm
+- n.xxx.ipynb        : sample of function of this repository
+- README.md          : this
+- requirements.txt   : package list of requirement packages
+
