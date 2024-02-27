@@ -24,6 +24,25 @@ def simulate(dag: RDG_DAG, **kwargs):
     # in sample, response time of DAG (maximum finish time of all nodes)
     return max([n.finish_time for n in scheduled_nodes])
 
+def simulate_taskset(dags: list[RDG_DAG]):
+    loop_len = len(dags)
+    results: list = []
+
+    for idx, dag in enumerate(dags):
+        results.append(simulate(dag))
+        print("\r" + f'{idx+1} / {loop_len} : {100*(idx+1)/loop_len:.0f}%', end="")
+    print()
+
+    return results
+
+
+
+################
+### appendix ###
+################
+
+
+
 def prepare_method(dag: RDG_DAG) -> tuple[bool,]:
     # return True when proposed method lose
 
@@ -36,21 +55,6 @@ def prepare_method(dag: RDG_DAG) -> tuple[bool,]:
     # if you want, another object can return
     wcrt = max([n.finish_time for n in scheduled_nodes])
     return wcrt > 200, wcrt, 200
-
-
-
-
-
-def simulate_taskset(dags: list[RDG_DAG]):
-    loop_len = len(dags)
-    results: list = []
-
-    for idx, dag in enumerate(dags):
-        results.append(simulate(dag))
-        print("\r" + f'{idx+1} / {loop_len} : {100*(idx+1)/loop_len:.0f}%', end="")
-    print()
-
-    return results
 
 def prepare_method_taskset(dags: list[RDG_DAG]):
     loop_len = len(dags)
