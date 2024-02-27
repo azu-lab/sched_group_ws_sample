@@ -1,3 +1,5 @@
+# NOTE: NOT refactored
+
 from .task import Task
 
 class Node(Task):

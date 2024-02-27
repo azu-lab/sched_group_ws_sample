@@ -1,4 +1,4 @@
-
+# NOTE: NOT refactored
 
 class Task:
     def __init__(self, idx: int, wcet: int, release_time: int):
