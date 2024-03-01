@@ -46,6 +46,8 @@ scheduling algorithm is implemented in src.simulate.simulate function
 src.simulate.simulate return evaluated value (ex. WCRT)
 
 src.simulate.simulate_taskset return list of evaluated values for all DAG (dags)
+## 4. 2'. evaluate taskset
+Instead of using the simulate_taskset function, the unit tests are written in .py files and all loops are done in .ipynb
 ### 4. 3. visualize
 
 **↓ appendix (not refactored) ↓**
