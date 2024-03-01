@@ -1,4 +1,5 @@
 # sched_group_ws_sample
+Package for RD-Gen and SchedulingVisualizer, and Templete for program of thesis.
 Sample procedures are described in each jupyter notebook (.ipynb).
 
 ## 0. install dependency package
